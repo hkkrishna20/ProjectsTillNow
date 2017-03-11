@@ -1,0 +1,34 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+public class DeptShow {
+	
+	public static void main(String[] args) {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:ORACLE","scott","tiger");
+		    Statement st=con.createStatement();
+		    ResultSet rs=st.executeQuery("select * from DEPARTMENT");
+		    while(rs.next()) {
+		    	System.out.println("DeptNo " +rs.getInt("DEPTNO"));
+		    	System.out.println("DName " +rs.getString("DNAME"));
+		    	System.out.println("Location  " +rs.getString("LOC"));
+		    	System.out.println("City  " +rs.getString("CITY"));
+		    	System.out.println("Head  " +rs.getString("HEAD"));
+		    	
+		    }
+		} catch (ClassNotFoundException e) {
+		
+			e.printStackTrace();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+
+}
